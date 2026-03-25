@@ -1,0 +1,11 @@
+        /* Style for main text elements */
+        p  {font-size: 140%;}
+        h1 {font-size: 250%;}
+        h2 {font-size: 100%;}
+        html {background-color: #696969; color: white; font-family: 
+            'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
+        abbr {text-decoration: none; border-bottom: none; cursor: help;}
+        abbr.small {font-size: 80%;}
+        label {font-size: 100%; display: block;}
+        a {color: #ff9900c9;}
+        input.id-input {width: 200px; border: 2px solid #0052cd; border-radius: 7px; padding: 3px; font-size: 100%;}
