@@ -1,0 +1,55 @@
+        /* Style for main text elements */
+        p  {font-size: 100%;}
+
+        p.error {font-size: 100%; 
+                 color: #ff0000;}
+
+        h1 {font-size: 250%; 
+            text-align: center;}
+
+        h2.login-text {font-size: 150%; 
+                        text-align: center; 
+                        margin-top: 20px;}
+
+        html {background-color: #696969; 
+              color: white; 
+              font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
+
+        abbr {text-decoration: none; border-bottom: none; cursor: help;}
+
+        abbr.small {font-size: 80%;}
+
+        label {font-size: 100%; display: block;}
+
+        a {color: #ff9900c9;}
+
+        input.id-input {width: 200px; border: 2px solid #0052cd; border-radius: 7px; padding: 3px; font-size: 100%;}
+
+        footer{
+            height: 100px; 
+            display: flex; 
+            flex-direction: row; 
+            align-items: center; 
+            justify-content: center; 
+            position:fixed; 
+            bottom: 0px; 
+            width: 100%; 
+            margin: 0px 10px 0px 10px;
+        }
+
+        header{
+            height: 100px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position:fixed; 
+            top: 0px; 
+            width: 100%;
+        }
+
+        div.login-container{
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 20px;
+        }
