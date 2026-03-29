@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Login</title>
+    <link rel="stylesheet" href="styles/textstyles.css">
+<style>
+        body{
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header, footer {
+        padding: 10px;
+        text-align: center;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+    </style>
+</head>
+<body>
+<header style="height: 100px; display: flex; align-items: center; justify-content: center; position:fixed; top: 0px; width: 100%;"> 
+    <h1><abbr title="[CLS] 25/26/2 L-K-GINFBAL-WEBPROG1-1-EA01 - WEB-programozás I.">Web programozás-1 Előadás Házi feladat</abbr></h1>
+</header> 
+
+<div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <h2 class="login-text" id="loginTitle">Teacher Login</h2>
+        <div class="login-container">
+            <div>
+                <img src="/images/user_silhuette.png" alt="User Icon" style="width: 80px; height: 80px;">
+            </div>
+            <div>
+                <div>
+                    <label for="username">Username:</label>
+                    <input id="username" placeholder="Username" class ="id-input">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" placeholder="Password" class ="id-input">
+                </div>
+                <div>
+                    <button style="margin-top: 5px;" onclick="login()">Login</button> 
+                </div>
+                <div>
+                    <p id="error" style="color:red;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div style="display: flex;" position="relative" top="0px">
+            <a href="/Pages/index.html" style="margin: 70px;">Student Login</a>
+        </div>
+</div>
+
+<script src="js/script.js"></script>
+
+ <footer > 
+        <div style="margin-right: 20px;">
+            <a href="https://github.com/KSZIT-m" target="_blank">Kovács Szabolcs - EBKILY</a>
+        </div>
+
+        <div>
+            <a href="https://drive.google.com/drive/folders/12lDIxariOadDkGPaEssksPnL63lzYCbg" target="_blank">
+                <abbr class="small" title="2-13-Tankönyvrendelés-4 táblás">Felhasznált adatbázis</abbr>
+            </a>
+        </div>
+        
+        <div style="margin-left: 20px;">
+            <a href="https://github.com/FKristof97" target="_blank">Figura Kristóf - IDNNBT</a>
+        </div>
+    </footer>
+
+</body>
+</html>
