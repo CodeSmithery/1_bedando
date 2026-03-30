@@ -4,26 +4,88 @@
     <meta charset="UTF-8">
     <title>React Menu</title>
     <link rel="stylesheet" href="styles/textstyles.css">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #2c2f33, #23272a);
+            font-family: Arial, sans-serif;
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            position: absolute;
+            top: 30px;
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .card {
+            background: #2f3136;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.6);
+            text-align: center;
+            width: 400px;
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin-bottom: 25px;
+            color: #ccc;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background-color: #7289da;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .card a:hover {
+            background-color: #5b6eae;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            display: flex;
+            gap: 20px;
+        }
+
+        footer a {
+            color: #ff9900;
+        }
+    </style>
 </head>
+
 <body>
 
 <h1>Web programozás-1 Előadás Házi feladat</h1>
 
-<div class="container">
+<div class="card">
+    <h2>📚 Book Management</h2>
+    <p>This menu opens the book management application.</p>
 
-    <h2>Book Management</h2>
-
-    <p>This menu opens the React CRUD application.</p>
-
-    <a href="http://localhost:3000" target="_blank">
-        Open React Application
+    <a href="Pages/react-app/index.html" target="_blank">
+        Open Application
     </a>
-
 </div>
 
-<script src="js/script.js"></script>
-
- <footer > 
+<footer > 
         <div style="margin-right: 20px;">
             <a href="https://github.com/KSZIT-m" target="_blank">Kovács Szabolcs - EBKILY</a>
         </div>
