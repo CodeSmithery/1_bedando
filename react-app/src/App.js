@@ -1,22 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
 
-  const [books, setBooks] = useState
-  ([
-    { id: 1, title: "Kémia 9.", subject: "kémia", publisher: "DW-695-2822-1" },
-    { id: 2, title: "Matematika 9.", subject: "matematika", publisher: "SH-2309" },
-    { id: 3, title: "Négyjegyű függvénytáblázat", subject: "matematika", publisher: "BB-0319" },
-    { id: 4, title: "Geometriai feladatgyűjtemény I.", subject: "matematika", publisher: "NK-10127/I" },
-    { id: 5, title: "Történelem I.", subject: "történelem", publisher: "NK-13163/1" }
-  ]);
-
+  const [books, setBooks] = useState ([]);
+ 
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
   const [publisher, setPublisher] = useState("");
 
-  // CREATE
+   useEffect(() => {
+  fetch("./tk.txt")
+    .then(res => {
+      if (!res.ok) throw new Error("Nem található a fájl");
+      return res.text();
+    })
+    .then(text => {
+      const lines = text.split("\n").slice(1);
+
+      const loadedBooks = lines
+        .filter(line => line.trim() !== "")
+        .map((line, index) => {
+          const parts = line.split("\t");
+
+          return {
+            id: index + 1,
+            title: parts[2],
+            subject: parts[3],
+            publisher: parts[1]
+          };
+        });
+
+      console.log("BETÖLTÖTT:", loadedBooks); // 👈 FONTOS
+      setBooks(loadedBooks);
+    })
+    .catch(err => console.error("HIBA:", err));
+}, []);
+
+
   const addBook = () => {
     if (!title || !subject || !publisher) {
       alert("Fill all fields!");
@@ -37,13 +58,11 @@ function App() {
     setPublisher("");
   };
 
-  // DELETE
 
   const deleteBook = (id) => {
     setBooks(books.filter(book => book.id !== id));
   };
 
-  // UPDATE
  
   const editBook = (id) => {
   const book = books.find(b => b.id === id);
