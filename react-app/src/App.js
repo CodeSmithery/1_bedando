@@ -12,7 +12,7 @@ function App() {
    useEffect(() => {
   fetch("./tk.txt")
     .then(res => {
-      if (!res.ok) throw new Error("Nem található a fájl");
+      if (!res.ok) throw new Error("File not found");
       return res.text();
     })
     .then(text => {
@@ -31,10 +31,10 @@ function App() {
           };
         });
 
-      console.log("BETÖLTÖTT:", loadedBooks); // 👈 FONTOS
+      console.log("LOADED BOOKS:", loadedBooks);
       setBooks(loadedBooks);
     })
-    .catch(err => console.error("HIBA:", err));
+    .catch(err => console.error("ERROR:", err));
 }, []);
 
 
