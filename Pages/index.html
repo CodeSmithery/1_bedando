@@ -28,33 +28,50 @@
     </style>
 </head>
 <body>
+
     <!-- I. feladat: Fejlécbe írassa ki H1-es címsorral: Web programozás-1 Előadás Házi feladat -->
-    <header style="height: 100px; display: flex; align-items: center; justify-content: center; position:fixed; top: 0px; width: 100%;"> 
+    <header> 
         <h1><abbr title="[CLS] 25/26/2 L-K-GINFBAL-WEBPROG1-1-EA01 - WEB-programozás I.">Web programozás-1 Előadás Házi feladat</abbr></h1>
     </header> 
-    <div style="margin-right: 10px"> 
-        <img src="/images/user_silhuette.png" alt="Image 1" style="width: 80px; height: 80px;" display="block">
-    </div>
+        <!-- Belépés -->
+<div style="display: flex; flex-direction: column; align-items: center;">
     <div>
-        <div>
-            <label for="student-id">Írja be az azonosítóját:</label>
-            <input type="text" id="student-id" name="student-id" class="id-input">
-        </div> 
-        <div> 
-            <label for="class-id">Írja be az osztályazonosítót:</label>
-            <input type="text" id="class-id" name="class-id" class="id-input">
+        <h2 class="login-text" >Diák belépés</h2>
+        <div class="login-container">
+            <div>
+                <img src="/images/user_silhuette.png" alt="Image 1" style="width: 80px; height: 80px;">
+            </div>
+            <div>
+                <div>
+                    <label for="student-id">Diák azonosító:</label>
+                    <input type="text" id="student-id" name="student-id" class="id-input" placeholder="pl.: 123456">
+                </div>
+                <div>
+                    <label for="class-id">Osztályazonosító:</label>
+                    <input type="text" id="class-id" name="class-id" class="id-input" placeholder="pl.: 2008A">
+                </div>
+                <div style="margin-top: 5px;">
+                    <button onclick="">Belépés</button>
+                </div>
+            </div>
         </div>
     </div>
+    <div style="display: flex;" position="relative" top="0px">
+        <a href="/Pages/javascript.html" style="margin: 70px;">Tanári belépés</a>
+    </div>
+</div>
     <!-- I. feladat: Láblécbe írja be a készítők nevét és Neptun kódját -->
-    <footer style="height: 100px; display: flex; flex-direction: row; align-items: center; justify-content: center; position:fixed; bottom: 0px; width: 100%; margin: 0px 10px 0px 10px;"> 
+    <footer > 
         <div style="margin-right: 20px;">
             <a href="https://github.com/KSZIT-m" target="_blank">Kovács Szabolcs - EBKILY</a>
         </div>
+
         <div>
-                <a href="https://drive.google.com/drive/folders/12lDIxariOadDkGPaEssksPnL63lzYCbg" target="_blank">
-                    <abbr class="small" title="2-13-Tankönyvrendelés-4 táblás">Felhasznált adatbázis</abbr>
-                </a>
+            <a href="https://drive.google.com/drive/folders/12lDIxariOadDkGPaEssksPnL63lzYCbg" target="_blank">
+                <abbr class="small" title="2-13-Tankönyvrendelés-4 táblás">Felhasznált adatbázis</abbr>
+            </a>
         </div>
+        
         <div style="margin-left: 20px;">
             <a href="https://github.com/FKristof97" target="_blank">Figura Kristóf - IDNNBT</a>
         </div>

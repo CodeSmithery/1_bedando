@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tanári belépés</title>
+    <link rel="stylesheet" href="/styles/textstyles.css">
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header, footer {
+        padding: 10px;
+        text-align: center;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Tankönyv rendelő</h1>
+</header>
+<!-- LOGIN -->
+<div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <h2 class="login-text" id="loginTitle">Tanári belépés</h2>
+        <div class="login-container">
+            <div>
+                <img src="/images/user_silhuette.png" alt="User Icon" style="width: 80px; height: 80px;">
+            </div>
+            <div>
+                <div>
+                    <label for="felhasznalonev">Felhasználónév:</label>
+                    <input id="felhasznalonev" placeholder="Felhasználónév" class ="id-input">
+                </div>
+                <div>
+                    <label for="jelszo">Jelszó:</label>
+                    <input id="jelszo" type="password" placeholder="Jelszó" class ="id-input">
+                </div>
+                <div>
+                    <button style="margin-top: 5px;" onclick="login()">Belépés</button> 
+                </div>
+                <div>
+                    <p id="hiba" class="error"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div style="display: flex;" position="relative" top="0px">
+            <a href="/Pages/index.html" style="margin: 70px;">Diák belépés</a>
+        </div>
+</div>
+<!-- CRUD RÉSZ -->
+<div id="app" style="display:none;">
+
+    <h2>Diákok kezelése</h2>
+
+    <input id="ujNev" placeholder="Név">
+    <input id="ujOsztaly" placeholder="Osztály">
+    <button onclick="addDiak()">Hozzáadás</button>
+    <ul id="lista"></ul>
+
+</div>
+
+<script>
+
+// LOGIN (fix adatokkal)
+function login() {
+    let felhasznalonev = document.getElementById("felhasznalonev").value;
+    let jelszo = document.getElementById("jelszo").value;
+
+    if (felhasznalonev.trim() === "Figura Kristóf" && jelszo.trim() === "beadandó") {
+        document.getElementById("hiba").innerText = "";
+        document.getElementById("app").style.display = "block";
+
+        loadDiakok(); // adatbázisból betöltés
+    } else {
+        document.getElementById("hiba").innerText = "Hibás felhasználónév vagy jelszó!";
+    }
+}
+
+// ADATBETÖLTÉS (PHP-ból)
+let diakok = [];
+
+function loadDiakok() {
+    fetch("php/getDiakok.php")
+    .then(res => res.json())
+    .then(data => {
+        console.log("BETÖLTÖTT ADATOK:", data);
+
+        diakok = data.map(d => {
+            return {
+                nev: d.nev,
+                osztaly: d.osztaly
+            };
+        });
+
+        console.log("ÁTALAKÍTOTT:", diakok);
+
+        render();
+    })
+    .catch(err => {
+        console.error("HIBA:", err);
+    });
+}
+
+// CREATE
+function addDiak() {
+    let nev = document.getElementById("ujNev").value;
+    let osztaly = document.getElementById("ujOsztaly").value;
+
+    if (!nev || !osztaly) {
+        alert("Tölts ki mindent!");
+        return;
+    }
+
+    diakok.push({ nev, osztaly });
+    render();
+}
+
+// READ
+function render() {
+    let lista = document.getElementById("lista");
+    lista.innerHTML = "";
+
+    if (diakok.length === 0) {
+        lista.innerHTML = "<li>Nincs adat</li>";
+        return;
+    }
+
+    diakok.forEach((d, index) => {
+        lista.innerHTML += `
+            <li>
+                ${d.nev} (${d.osztaly})
+                <button onclick="deleteDiak(${index})">Törlés</button>
+                <button onclick="editDiak(${index})">Szerkesztés</button>
+            </li>
+        `;
+    });
+}
+
+// DELETE
+function deleteDiak(index) {
+    diakok.splice(index, 1);
+    render();
+}
+
+// UPDATE
+function editDiak(index) {
+    let ujNev = prompt("Új név:", diakok[index].nev);
+    let ujOsztaly = prompt("Új osztály:", diakok[index].osztaly);
+
+    if (ujNev && ujOsztaly) {
+        diakok[index].nev = ujNev;
+        diakok[index].osztaly = ujOsztaly;
+        render();
+    }
+}
+
+</script>
+<footer> 
+        <div style="margin-right: 20px;">
+            <a href="https://github.com/KSZIT-m" target="_blank">Kovács Szabolcs - EBKILY</a>
+        </div>
+
+        <div>
+            <a href="https://drive.google.com/drive/folders/12lDIxariOadDkGPaEssksPnL63lzYCbg" target="_blank">
+                <abbr class="small" title="2-13-Tankönyvrendelés-4 táblás">Felhasznált adatbázis</abbr>
+            </a>
+        </div>
+        
+        <div style="margin-left: 20px;">
+            <a href="https://github.com/FKristof97" target="_blank">Figura Kristóf - IDNNBT</a>
+        </div>
+    </footer>
+</body>
+</html>
