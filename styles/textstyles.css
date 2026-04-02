@@ -25,16 +25,15 @@
 
         input.id-input {width: 200px; border: 2px solid #0052cd; border-radius: 7px; padding: 3px; font-size: 100%;}
 
-        footer{
-            height: 100px; 
-            display: flex; 
-            flex-direction: row; 
-            align-items: center; 
-            justify-content: center; 
-            position:fixed; 
-            bottom: 0px; 
-            width: 100%; 
-            margin: 0px 10px 0px 10px;
+        footer
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 
         header{

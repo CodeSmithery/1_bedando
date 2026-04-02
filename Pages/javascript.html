@@ -2,166 +2,166 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Tanári belépés</title>
+    <title>Teacher Login</title>
     <link rel="stylesheet" href="/styles/textstyles.css">
     <style>
-        body{
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        header, footer {
-        padding: 10px;
-        text-align: center;
-        }
+      body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #666;
+    color: white;
+}
 
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center; 
-        }
+/* FEJLÉC */
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 40px;
+}
+
+/* LOGIN DOBOZ */
+.login-container {
+    width: 300px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+footer a {
+    color: orange;
+    margin: 0 10px;
+    text-decoration: none;
+}
     </style>
 </head>
 <body>
-<header>
-    <h1>Tankönyv rendelő</h1>
-</header>
+
+<h1>Book Ordering</h1>
+
 <!-- LOGIN -->
-<div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <h2 class="login-text" id="loginTitle">Tanári belépés</h2>
-        <div class="login-container">
-            <div>
-                <img src="/images/user_silhuette.png" alt="User Icon" style="width: 80px; height: 80px;">
-            </div>
-            <div>
-                <div>
-                    <label for="felhasznalonev">Felhasználónév:</label>
-                    <input id="felhasznalonev" placeholder="Felhasználónév" class ="id-input">
-                </div>
-                <div>
-                    <label for="jelszo">Jelszó:</label>
-                    <input id="jelszo" type="password" placeholder="Jelszó" class ="id-input">
-                </div>
-                <div>
-                    <button style="margin-top: 5px;" onclick="login()">Belépés</button> 
-                </div>
-                <div>
-                    <p id="hiba" class="error"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-        <div style="display: flex;" position="relative" top="0px">
-            <a href="/Pages/index.html" style="margin: 70px;">Diák belépés</a>
-        </div>
-</div>
+<h2 id="loginTitle">Teacher Login</h2>
+
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<p id="hiba" style="color:red;"></p>
+
+<hr>
+
 <!-- CRUD RÉSZ -->
 <div id="app" style="display:none;">
 
-    <h2>Diákok kezelése</h2>
+    <h2>Student Management</h2>
 
-    <input id="ujNev" placeholder="Név">
-    <input id="ujOsztaly" placeholder="Osztály">
-    <button onclick="addDiak()">Hozzáadás</button>
+    <input id="newName" placeholder="Name">
+    <input id="newClass" placeholder="Class">
+    <button onclick="addStudent()">Add Student</button>
+
     <ul id="lista"></ul>
 
 </div>
 
 <script>
 
-// LOGIN (fix adatokkal)
+// LOGIN
 function login() {
-    let felhasznalonev = document.getElementById("felhasznalonev").value;
-    let jelszo = document.getElementById("jelszo").value;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
-    if (felhasznalonev.trim() === "Figura Kristóf" && jelszo.trim() === "beadandó") {
-        document.getElementById("hiba").innerText = "";
+    if (username.trim() === "Figura Kristof" && password.trim() === "beadando") {
+        document.getElementById("error").innerText = "";
         document.getElementById("app").style.display = "block";
-
-        loadDiakok(); // adatbázisból betöltés
+        render();
+        
     } else {
-        document.getElementById("hiba").innerText = "Hibás felhasználónév vagy jelszó!";
+        document.getElementById("error").innerText = "Invalid username or password!";
     }
 }
 
-// ADATBETÖLTÉS (PHP-ból)
-let diakok = [];
-
-function loadDiakok() {
-    fetch("php/getDiakok.php")
-    .then(res => res.json())
-    .then(data => {
-        console.log("BETÖLTÖTT ADATOK:", data);
-
-        diakok = data.map(d => {
-            return {
-                nev: d.nev,
-                osztaly: d.osztaly
-            };
-        });
-
-        console.log("ÁTALAKÍTOTT:", diakok);
-
-        render();
-    })
-    .catch(err => {
-        console.error("HIBA:", err);
-    });
-}
+// DATA ARRAY
+let students = [
+    { name: "Török Nóra", class: "2001B" },
+    { name: "Molnár Róbert", class: "2002A" },
+    { name: "Szabó Ádám", class: "2002B" },
+    { name: "Blazsetics Olga", class: "2003B" },
+    { name: "Bodosi János", class: "2005A" }
+];
 
 // CREATE
-function addDiak() {
-    let nev = document.getElementById("ujNev").value;
-    let osztaly = document.getElementById("ujOsztaly").value;
+function addStudent() {
+    let name = document.getElementById("newName").value;
+    let className = document.getElementById("newClass").value;
 
-    if (!nev || !osztaly) {
-        alert("Tölts ki mindent!");
+    if (!name || !className) {
+        alert("Please fill in all fields!");
         return;
     }
 
-    diakok.push({ nev, osztaly });
+    students.push({ name, class: className });
+
+    document.getElementById("newName").value = "";
+    document.getElementById("newClass").value = "";
+
     render();
 }
 
 // READ
 function render() {
-    let lista = document.getElementById("lista");
-    lista.innerHTML = "";
+    let list = document.getElementById("list");
+    list.innerHTML = "";
 
-    if (diakok.length === 0) {
-        lista.innerHTML = "<li>Nincs adat</li>";
+    if (students.length === 0) {
+        list.innerHTML = "<li>No data available</li>";
         return;
     }
 
-    diakok.forEach((d, index) => {
-        lista.innerHTML += `
+    students.forEach((d, index) => {
+        list.innerHTML += `
             <li>
-                ${d.nev} (${d.osztaly})
-                <button onclick="deleteDiak(${index})">Törlés</button>
-                <button onclick="editDiak(${index})">Szerkesztés</button>
+                ${d.name} (${d.class})
+                <button onclick="deleteStudent(${index})">Delete</button>
+                <button onclick="editStudent(${index})">Edit</button>
             </li>
         `;
     });
 }
 
 // DELETE
-function deleteDiak(index) {
-    diakok.splice(index, 1);
+function deleteStudent(index) {
+    students.splice(index, 1);
     render();
 }
 
 // UPDATE
-function editDiak(index) {
-    let ujNev = prompt("Új név:", diakok[index].nev);
-    let ujOsztaly = prompt("Új osztály:", diakok[index].osztaly);
+function editStudent(index) {
+    let newName = prompt("New name:", students[index].name);
+    let newClass = prompt("New class:", students[index].class);
 
-    if (ujNev && ujOsztaly) {
-        diakok[index].nev = ujNev;
-        diakok[index].osztaly = ujOsztaly;
+    if (newName && newClass) {
+        students[index].name = newName;
+        students[index].class = newClass;
         render();
     }
 }
