@@ -1,81 +1,51 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html lang="hu">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Könyvrendelés</title>
-    <link rel="stylesheet" href="/styles/textstyles.css">
-    <style>
-        body{
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        header, footer {
-        padding: 10px;
-        text-align: center;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center; 
-        }
-    </style>
+    <title>Főoldal</title>
+    <link rel="stylesheet" href="/Styles/textstyles.css">
+    <link rel="stylesheet" href="/Styles/button.css">
+    <link rel="stylesheet" href="/Styles/divstyles.css">
+    <link rel="stylesheet" href="/Styles/pagelayout.css">
 </head>
-<body>
-
-    <!-- I. feladat: Fejlécbe írassa ki H1-es címsorral: Web programozás-1 Előadás Házi feladat -->
-    <header> 
-        <h1><abbr title="[CLS] 25/26/2 L-K-GINFBAL-WEBPROG1-1-EA01 - WEB-programozás I.">Web programozás-1 Előadás Házi feladat</abbr></h1>
-    </header> 
-        <!-- Belépés -->
-<div style="display: flex; flex-direction: column; align-items: center;">
+<body style="overflow: hidden;"> 
+<header> 
     <div>
-        <h2 class="login-text" >Diák belépés</h2>
-        <div class="login-container">
-            <div>
-                <img src="/images/user_silhuette.png" alt="Image 1" style="width: 80px; height: 80px;">
-            </div>
-            <div>
-                <div>
-                    <label for="student-id">Diák azonosító:</label>
-                    <input type="text" id="student-id" name="student-id" class="id-input" placeholder="pl.: 123456">
-                </div>
-                <div>
-                    <label for="class-id">Osztályazonosító:</label>
-                    <input type="text" id="class-id" name="class-id" class="id-input" placeholder="pl.: 2008A">
-                </div>
-                <div style="margin-top: 5px;">
-                    <button onclick="">Belépés</button>
-                </div>
-            </div>
-        </div>
+        <h1><abbr title="[CLS] 25/26/2 L-K-GINFBAL-WEBPROG1-1-EA01 - WEB-programozás I.">Web programozás-1 Előadás Házi feladat</abbr></h1>
     </div>
-    <div style="display: flex;" position="relative" top="0px">
-        <a href="/Pages/javascript.html" style="margin: 70px;">Tanári belépés</a>
-    </div>
-</div>
-    <!-- I. feladat: Láblécbe írja be a készítők nevét és Neptun kódját -->
-    <footer > 
-        <div style="margin-right: 20px;">
-            <a href="https://github.com/KSZIT-m" target="_blank">Kovács Szabolcs - EBKILY</a>
-        </div>
+</header> 
 
-        <div>
-            <a href="https://drive.google.com/drive/folders/12lDIxariOadDkGPaEssksPnL63lzYCbg" target="_blank">
-                <abbr class="small" title="2-13-Tankönyvrendelés-4 táblás">Felhasznált adatbázis</abbr>
-            </a>
+<main>  
+    <div class="vcontainer">
+        <div class="hcontainer">
+            <div class="box">
+                <button class="index">JavaScript menü</button>
+            </div>
+            <div class="box">
+                <button class="index">React menü</button>
+            </div>
         </div>
-        
-        <div style="margin-left: 20px;">
-            <a href="https://github.com/FKristof97" target="_blank">Figura Kristóf - IDNNBT</a>
+        <div class="hcontainer">
+            <div class="box">
+                <button class="index">SPA menü</button>
+            </div>
+            <div class="box">
+                <button class="index">Fetch API menü</button>
+            </div>
         </div>
-    </footer>
+    </div>
+</main>
+
+<footer> 
+    <div class="hcontainer" style="gap: 45px">
+        <a href="https://github.com/KSZIT-m" target="_blank">Kovács Szabolcs - EBKILY</a>
+        <a href="https://drive.google.com/drive/folders/12lDIxariOadDkGPaEssksPnL63lzYCbg" target="_blank">
+            <abbr class="small" title="2-13-Tankönyvrendelés-4 táblás">Felhasznált adatbázis</abbr>
+        </a>
+        <a href="https://github.com/FKristof97" target="_blank">Figura Kristóf - IDNNBT</a>
+    </div>
+</footer>
 </body>
-
+</body>
 </html>

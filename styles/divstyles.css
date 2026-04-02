@@ -1,0 +1,18 @@
+div.vcontainer {
+    border: 1px solid white;
+    display: flex; /* rugalmasan helyezi el az elemeket */
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    min-height: 250px;
+    gap: 10vh;
+}
+div.hcontainer {
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    width: calc(100%-15px);
+    gap: 10vw;
+}
