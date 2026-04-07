@@ -8,7 +8,7 @@ div.container {
 }
 div.container.v {
     flex-direction: column;
-    border: 1px solid #ff8000;
+    border: 1px solid #ff9900c9;
 }
 div.container.h {
     flex-direction: row;
@@ -19,4 +19,8 @@ div.container.button {
     flex-direction: column;
     width: 300px;
     margin-left: 10px;
+    gap: 2vh;
+}
+.selected{
+    background-color: #cc7a00c9;
 }

@@ -1,37 +1,19 @@
 button {
-    background-color: aqua;
-    font-size: 14px;
+    background-color: #666666;
     width: 13vw;
     height: 18vh;
     min-width: 135px;
     min-height: 42.5px;
     max-width: 295px;
     max-height: 175px;
+    font-size: clamp(0.9rem, 2vw, 2.9rem);
+    color: #ff9100;
+    border-radius: 2vw;
+    white-space: pre-wrap;
 }
-button.create {
-    background-color: blue;
-}
-button.read {
-    background-color: blueviolet;
-}
-button.update {
-    background-color: brown;
-}
-button.delete {
-    background-color: cadetblue;
-}
-div.ass {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
 @media (max-height: 700px){
     button {
         height: 17vh
-    }
-    div.ass {
-        gap : 30px
     }
 }
 
@@ -39,7 +21,9 @@ div.ass {
     button {
         height: 13vh;
     }
-    div.ass {
-        gap : 20px
-    }
 }
+.selected {
+    background-color: #ff9100;
+    font-weight: bold;
+    color: black;
+ }

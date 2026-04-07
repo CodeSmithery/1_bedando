@@ -1,10 +1,8 @@
 import React from 'react';
-import { ThemeProvider } from '../../context/ThemeContext';
-import ThemeSlider from '../scripts/ThemeSlider';
-import '../styles/slider.css';
 import '../styles/App.css';
 import StartLayout from '../scripts/StartLayout';
 import '../styles/divstyles.css'
+import { DataContext } from '../../context/DataContext';
 
 
 function App() {
