@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TableSelector({ onSelect }) {
+export default function TableSelector({ onSelect }) { /* kiválasztja melyik táblából fog dolgozni és ennek értékét átadja kattintáskor */
     return (
         <div>
             <h2>Válassz táblát</h2>

@@ -1,4 +1,4 @@
-export default function CRUDSelector({ onSelect, onBack }) {
+export default function CRUDSelector({ onSelect, onBack }) { /*  */
     return (
         <div>
             <h2>Válassz műveletet</h2>

@@ -1,44 +1,45 @@
 import { useContext, useState } from "react";
-import { DataContext } from "../../context/DataContext";
-import { tableConfig } from "../../data/tableConfig";
+import { DataContext } from '../../context/DataContext';
+import '../styles/divstyles.css'
+import { tableConfig } from "../data/tableConfig"; /* megmondja az adott tábla milyen mezőkből áll */
 
 export default function Create({ table }) {
-    const { diak, setDiak, rendeles, setRendeles, tk, setTk, tkar, setTkar } = useContext(DataContext);
+    const { diak, setDiak, rendeles, setRendeles, tk, setTk, tkar, setTkar } = useContext(DataContext); /* kiemeljük contextből a tábla adatait és hozzárakjuk a settereket */
 
-    const dataMap = { diak, rendeles, tk, tkar };
-    const setterMap = { diak: setDiak, rendeles: setRendeles, tk: setTk, tkar: setTkar };
+    const dataMap = { diak, rendeles, tk, tkar }; /* lehetséges táblák */
+    const setterMap = { diak: setDiak, rendeles: setRendeles, tk: setTk, tkar: setTkar }; /* táblához rendelt setfüggvény */
 
-    const data = dataMap[table];
-    const setData = setterMap[table];
+    const data = dataMap[table]; /* beadjuk a megfelelő táblát */
+    const setData = setterMap[table]; /* visszaadja a jó settert */
 
-    const config = tableConfig[table];
+    const config = tableConfig[table]; /* megadja a tábla struktúrát és, hogy mi a kulcs */
 
-    const [form, setForm] = useState(
+    const [form, setForm] = useState( /* üres mezős form-ot készít a mezők függvényében */
         Object.fromEntries(config.fields.map(f => [f.name, ""]))
-    );
+    ); 
 
-    function handleChange(e, field) {
+    function handleChange(e, field) { /* frissíti az állapotot, ha chechbox akkor bool ha nem akkr string/number */
         const value = field.type === "checkbox" ? e.target.checked : e.target.value;
         setForm({ ...form, [field.name]: value });
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e) { /* nem tölti újra az oldal */
         e.preventDefault();
 
-        const newId =
+        const newId = /* megkeresi a legnagyobb azonosítót és ha nincs 1-et állít be */
             data.length > 0
                 ? Math.max(...data.map(d => d[config.key])) + 1
                 : 1;
 
-        const newRow = { ...form, [config.key]: newId };
+        const newRow = { ...form, [config.key]: newId }; /* elkészíti az új egyedet a form alapján az új azonosítóval */
 
-        setData([...data, newRow]);
+        setData([...data, newRow]); /* visszaadja a DataContext-be */
 
-        setForm(Object.fromEntries(config.fields.map(f => [f.name, ""])));
+        setForm(Object.fromEntries(config.fields.map(f => [f.name, ""]))); /* kiűríti a formot */
     }
 
     return (
-        <div>
+        <div> {/* dinamikusan kitölti a form-ot */}
             <h2>{config.label} – Új elem hozzáadása</h2>
 
             <form onSubmit={handleSubmit}>

@@ -1,6 +1,9 @@
 import { useContext } from "react";
-import { DataContext } from "../../context/DataContext";
-import { tableConfig } from "../../data/tableConfig";
+import { DataContext } from '../../context/DataContext';
+import '../styles/divstyles.css'
+import { tableConfig } from "../data/tableConfig";
+
+/* Működési magyarázat a Create.js fáljban. */
 
 export default function Delete({ table }) {
     const { diak, setDiak, rendeles, setRendeles, tk, setTk, tkar, setTkar } = useContext(DataContext);

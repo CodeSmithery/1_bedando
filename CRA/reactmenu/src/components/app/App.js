@@ -2,13 +2,14 @@ import { React, useContext, useState } from 'react';
 import '../styles/App.css';
 import '../styles/divstyles.css'
 
+
 import TableSelector from "../ui/TableSelector";
 import CRUDSelector from "../ui/CRUDSelector";
 
-import Read from '../crud/Read';
-import Create from '../crud/Create';
-import Update from "../crud/Update";
-import Delete from "../crud/Delete";
+import Read from '../crud/Read.js';
+import Create from '../crud/Create.js';
+import Update from "../crud/Update.js";
+import Delete from "../crud/Delete.js";
 
 function MainApp() {
     const [selectedTable, setSelectedTable] = useState(null);
@@ -22,16 +23,16 @@ function MainApp() {
     function resetToActions() {
         setSelectedAction(null);
     }
-
+    
     return (
+        
         <div style={{ padding: "20px" }}>
-            
             {/* 1. lépés: tábla választás */}
             {!selectedTable && (
                 <TableSelector onSelect={setSelectedTable} />
             )}
 
-            {/* 2. lépés: CRUD választás */}
+            {/* 2. lépés: művelet válastás */}
             {selectedTable && !selectedAction && (
                 <CRUDSelector 
                     onSelect={setSelectedAction} 
@@ -39,7 +40,7 @@ function MainApp() {
                 />
             )}
 
-            {/* 3. lépés: CRUD UI megjelenítése */}
+            {/* 3. lépés: UI megjelenítés */}
             {selectedTable && selectedAction && (
                 <div>
                     <button onClick={resetToActions}>Vissza</button>
