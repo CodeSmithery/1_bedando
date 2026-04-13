@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Login</title>
+    <link rel="stylesheet" href="/Styles/textstyles.css">
+    <style>
+      body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #666;
+    color: white;
+}
+
+/* FEJLÉC */
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 40px;
+}
+
+/* LOGIN DOBOZ */
+.login-container {
+    width: 300px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+footer a {
+    color: orange;
+    margin: 0 10px;
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+
+<h1>Book Ordering</h1>
+
+<!-- LOGIN -->
+<h2 id="loginTitle">Teacher Login</h2>
+
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<p id="hiba" style="color:red;"></p>
+
+<hr>
+
+<!-- CRUD RÉSZ -->
+<div id="app" style="display:none;">
+
+    <h2>Student Management</h2>
+
+    <input id="newName" placeholder="Name">
+    <input id="newClass" placeholder="Class">
+    <button onclick="addStudent()">Add Student</button>
+
+    <ul id="lista"></ul>
+
+</div>
+
+<script>
+
+// LOGIN
+function login() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    if (username.trim() === "Figura Kristof" && password.trim() === "beadando") {
+        document.getElementById("error").innerText = "";
+        document.getElementById("app").style.display = "block";
+        render();
+        
+    } else {
+        document.getElementById("error").innerText = "Invalid username or password!";
+    }
+}
+
+// DATA ARRAY
+let students = [
+    { name: "Török Nóra", class: "2001B" },
+    { name: "Molnár Róbert", class: "2002A" },
+    { name: "Szabó Ádám", class: "2002B" },
+    { name: "Blazsetics Olga", class: "2003B" },
+    { name: "Bodosi János", class: "2005A" }
+];
+
+// CREATE
+function addStudent() {
+    let name = document.getElementById("newName").value;
+    let className = document.getElementById("newClass").value;
+
+    if (!name || !className) {
+        alert("Please fill in all fields!");
+        return;
+    }
+
+    students.push({ name, class: className });
+
+    document.getElementById("newName").value = "";
+    document.getElementById("newClass").value = "";
+
+    render();
+}
+
+// READ
+function render() {
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+
+    if (students.length === 0) {
+        list.innerHTML = "<li>No data available</li>";
+        return;
+    }
+
+    students.forEach((d, index) => {
+        list.innerHTML += `
+            <li>
+                ${d.name} (${d.class})
+                <button onclick="deleteStudent(${index})">Delete</button>
+                <button onclick="editStudent(${index})">Edit</button>
+            </li>
+        `;
+    });
+}
+
+// DELETE
+function deleteStudent(index) {
+    students.splice(index, 1);
+    render();
+}
+
+// UPDATE
+function editStudent(index) {
+    let newName = prompt("New name:", students[index].name);
+    let newClass = prompt("New class:", students[index].class);
+
+    if (newName && newClass) {
+        students[index].name = newName;
+        students[index].class = newClass;
+        render();
+    }
+}
+
+</script>
+</body>
+</html>

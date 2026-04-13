@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="/Styles/textstyles.css">
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header, footer {
+        padding: 10px;
+        text-align: center;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Student Management</h2>
+
+    <div class="form">
+    <input id="newName" placeholder="Name">
+    <input id="newClass" placeholder="Class">
+    <button onclick="addStudent()">Add Student</button>
+    </div>
+
+
+
+<ul id="list" class="student-list"></ul>
+</div>
+<script src="/Scripts/script.js"></script>
+
+</body>
+</html>

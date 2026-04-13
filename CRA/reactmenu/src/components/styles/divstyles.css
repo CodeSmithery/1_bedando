@@ -1,0 +1,35 @@
+div.container {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    height: 96%;
+}
+div.container.v {
+    flex-direction: column;
+}
+div.container.h {
+    flex-direction: row;
+}
+div.return{
+    display: flex;
+    justify-self: center;
+    margin-top: 25px;
+}
+div.leftAligned {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 100%;
+}
+@media (max-width: 1000px) {
+    div.return{
+        margin-top: 15px;
+    }
+}
+@media (max-height: 750px) {
+    div.return{
+        margin-top: 5px;
+    }
+}
