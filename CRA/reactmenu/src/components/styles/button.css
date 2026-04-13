@@ -1,29 +1,96 @@
-button {
-    background-color: #666666;
-    width: 13vw;
-    height: 18vh;
+button.menu.select {
+    width: 23vw;
+    height: 30vh;
     min-width: 135px;
     min-height: 42.5px;
-    max-width: 295px;
-    max-height: 175px;
-    font-size: clamp(0.9rem, 2vw, 2.9rem);
-    color: #ff9100;
-    border-radius: 2vw;
+    max-width: 450px;
+    max-height: 350px;
+    font-size: clamp(1.2rem, 3.5vw, 3.9rem);
     white-space: pre-wrap;
+    border-radius: 6vw;
+    margin: 25px;
+    background-color: #666666;
+    color: #ff9100;
 }
-@media (max-height: 700px){
-    button {
-        height: 17vh
-    }
-}
-
-@media (max-height: 500px) {
-    button {
-        height: 13vh;
-    }
-}
-.selected {
+button.menu.return {
+    border-radius: 1.5vw;
+    min-width: 60px;
+    min-height: 26px;
+    max-width: 100px;
+    max-height: 55px;
+    font-size: clamp(0.6rem, 1.5vw, 1.9rem);
+    color: #000000;
     background-color: #ff9100;
-    font-weight: bold;
-    color: black;
- }
+}
+button.submit {
+    color: #22ff00;
+    background-color: #666666;
+    border-radius: 1.5vw;
+    min-width: 100px;
+    min-height: 26px;
+    max-width: 170px;
+    max-height: 55px;
+    font-size: clamp(0.6rem, 1.5vw, 1.9rem);
+    margin-top: 1vh;
+}
+button.save {
+   color: #22ff00;
+    background-color: #666666;
+    border-radius: 1.5vw;
+    min-width: 100px;
+    min-height: 26px;
+    max-width: 170px;
+    max-height: 55px;
+    font-size: clamp(0.6rem, 1.5vw, 1.9rem);
+    margin-top: 1vh;
+    margin-bottom: 1.5vh;
+}
+button.delete{
+    color: #980000;
+    background-color: #ff9100;
+    border-radius: 0.5vw;
+    min-width: 80px;
+    min-height: 15px;
+    max-width: 130px;
+    max-height: 35px;
+    font-size: clamp(0.4rem, 1vw, 1.2rem);
+    margin-left: auto;
+    margin-right: 1vw;
+}
+button.modify {
+    border-radius: 0.5vw;
+    min-width: 160px;
+    min-height: 15px;
+    max-width: 250px;
+    max-height: 35px;
+    font-size: clamp(0.3rem, 1vw, 1.5rem);
+    color: #000000;
+    background-color: #ff9100;
+    margin-left: auto;
+}
+button.cancel {
+    color: #980000;
+        background-color: #666666;
+        border-radius: 1.5vw;
+        min-width: 80px;
+        min-height: 20px;
+        max-width: 130px;
+        max-height: 45px;
+        font-size: clamp(0.5rem, 1.2vw, 1.5rem);
+        margin-bottom: 1.5vh;
+}
+@media (max-width: 1000px) {
+    button.menu.select {
+        margin: 20px;
+    }
+}
+@media (max-width: 500px) {
+    button.menu.select {
+        margin: 15px;
+    }
+}
+@media (max-height: 750px) {
+    button.menu.select {
+        margin: 15px;
+    }
+}

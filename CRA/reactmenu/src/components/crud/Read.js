@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { DataContext } from '../../context/DataContext';
 import '../styles/divstyles.css'
+import '../styles/textstyles.css'
 import { tableConfig } from "../data/tableConfig";
 
 /* Működési magyarázat a Create.js fáljban. */
@@ -13,18 +14,22 @@ export default function Read({ table }) {
     const config = tableConfig[table];
 
     return (
-        <div>
+        <div className="container v">
             <h2>{config.label} – Lista</h2>
-
             <ul>
                 {data.map((row, i) => (
-                    <li key={i}>
-                        {config.fields.map(f => (
-                            <span key={f.name}>
-                                <strong>{f.label}:</strong> {String(row[f.name])}{" "}
-                            </span>
-                        ))}
-                    </li>
+                    <div>
+                        <li key={i}>
+                            {config.fields.map(f => (
+                                <div className="leftAligned">
+                                    <strong>{f.label}:</strong> 
+                                    <span className="aligned">
+                                        {String(row[f.name])}{" "}
+                                    </span>
+                                </div>
+                            ))}
+                        </li>
+                    </div>
                 ))}
             </ul>
         </div>

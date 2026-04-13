@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { DataContext } from '../../context/DataContext';
 import '../styles/divstyles.css'
+import '../styles/textstyles.css'
 import { tableConfig } from "../data/tableConfig";
 
 /* Működési magyarázat a Create.js fáljban. */
@@ -21,19 +22,25 @@ export default function Delete({ table }) {
     }
 
     return (
-        <div>
-            <h2>{config.label} – Törlés</h2>
-
+        <div className="container v">
+        <h2>{config.label} – Törlés</h2>
             <ul>
                 {data.map(row => (
-                    <li key={row[config.key]}>
-                        {config.fields.map(f => (
-                            <span key={f.name}>
-                                <strong>{f.label}:</strong> {String(row[f.name])}{" "}
-                            </span>
-                        ))}
-                        <button onClick={() => handleDelete(row[config.key])}>Törlés</button>
-                    </li>
+                    <div>
+                        <li key={row[config.key]}>
+                            {config.fields.map(f => (
+                                <div className="leftAligned">
+                                    <span className="">
+                                        <strong>{f.label}:</strong> 
+                                    </span>
+                                    <span className="aligned">
+                                        {String(row[f.name])}
+                                    </span>  
+                                </div>
+                            ))}
+                            <button className="delete" onClick={() => handleDelete(row[config.key])}>Törlés</button>
+                        </li>
+                    </div>
                 ))}
             </ul>
         </div>

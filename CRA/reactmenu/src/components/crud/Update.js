@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { DataContext} from '../../context/DataContext';
 import '../styles/divstyles.css'
+import '../styles/textstyles.css'
 import { tableConfig } from "../data/tableConfig";
 
 /* Működési magyarázat a Create.js fáljban. */
@@ -37,41 +38,46 @@ export default function Update({ table }) {
     }
 
     return (
-        <div>
+        <div className="container v">
             <h2>{config.label} – Módosítás</h2>
-
             {!selected && (
                 <ul>
                     {data.map(row => (
-                        <li key={row[config.key]}>
-                            {config.fields.map(f => (
-                                <span key={f.name}>
-                                    <strong>{f.label}:</strong> {String(row[f.name])}{" "}
-                                </span>
-                            ))}
-                            <button onClick={() => selectRow(row)}>Szerkesztés</button>
-                        </li>
+                        <div>
+                            <li key={row[config.key]}>
+                                {config.fields.map(f => (
+                                    <div className="leftAligned">
+                                        <strong>{f.label}:</strong> 
+                                        <span className="aligned">
+                                            {String(row[f.name])}{" "}
+                                        </span>
+                                    </div>
+                                ))}
+                                <button className="modify" onClick={() => selectRow(row)}>Szerkesztés</button>
+                            </li>
+                        </div>
                     ))}
                 </ul>
             )}
 
             {selected && (
-                <div>
+                <div className="container v">
                     <h3>Kiválasztott elem szerkesztése</h3>
-
                     {config.fields.map(field => (
-                        <div key={field.name}>
-                            <label>{field.label}:</label>
-                            <input
-                                type={field.type}
-                                value={form[field.name]}
-                                onChange={e => handleChange(e, field)}
-                            />
+                        <div className="container">
+                                <strong className="left">
+                                    <label>{field.label}:</label>
+                                </strong>
+                                <input
+                                    className="right"
+                                    type={field.type}
+                                    value={form[field.name]}
+                                    onChange={e => handleChange(e, field)}
+                                />
                         </div>
                     ))}
-
-                    <button onClick={handleSave}>Mentés</button>
-                    <button onClick={() => setSelected(null)}>Mégse</button>
+                    <button className="save" onClick={handleSave}>Mentés</button>
+                    <button className="cancel" onClick={() => setSelected(null)}>Mégse</button>
                 </div>
             )}
         </div>

@@ -17,7 +17,6 @@ export function DiakJSON() {
                     };
                 })
         );
-        console.log("kurva")
 }
 
 

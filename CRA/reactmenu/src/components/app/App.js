@@ -3,6 +3,7 @@ import '../styles/App.css';
 import '../styles/divstyles.css'
 
 
+
 import TableSelector from "../ui/TableSelector";
 import CRUDSelector from "../ui/CRUDSelector";
 
@@ -26,7 +27,7 @@ function MainApp() {
     
     return (
         
-        <div style={{ padding: "20px" }}>
+        <div className='container v'>
             {/* 1. lépés: tábla választás */}
             {!selectedTable && (
                 <TableSelector onSelect={setSelectedTable} />
@@ -42,9 +43,7 @@ function MainApp() {
 
             {/* 3. lépés: UI megjelenítés */}
             {selectedTable && selectedAction && (
-                <div>
-                    <button onClick={resetToActions}>Vissza</button>
-
+                <div className='container v'>
                     {selectedAction === "read" && (
                         <Read table={selectedTable} />
                     )}
@@ -60,6 +59,9 @@ function MainApp() {
                     {selectedAction === "delete" && (
                         <Delete table={selectedTable} />
                     )}
+                    <div className='return'>
+                    <button className='menu return' onClick={resetToActions}>Vissza</button>
+                    </div>
                 </div>
             )}
         </div>

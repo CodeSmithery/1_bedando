@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { DataContext } from '../../context/DataContext';
 import '../styles/divstyles.css'
+import '../styles/textstyles.css'
 import { tableConfig } from "../data/tableConfig"; /* megmondja az adott tábla milyen mezőkből áll */
 
 export default function Create({ table }) {
@@ -39,23 +40,25 @@ export default function Create({ table }) {
     }
 
     return (
-        <div> {/* dinamikusan kitölti a form-ot */}
+        <div className="container v"> {/* dinamikusan kitölti a form-ot */}
             <h2>{config.label} – Új elem hozzáadása</h2>
-
-            <form onSubmit={handleSubmit}>
-                {config.fields.map(field => (
-                    <div key={field.name}>
-                        <label>{field.label}:</label>
-                        <input
-                            type={field.type}
-                            value={form[field.name]}
-                            onChange={e => handleChange(e, field)}
-                        />
+            <div className="container v">
+                <form onSubmit={handleSubmit}>
+                    {config.fields.map(field => (
+                        <div className="container" key={field.name}>
+                            <input
+                                type={field.type}
+                                value={form[field.name]}
+                                onChange={e => handleChange(e, field)}
+                                placeholder={field.label}
+                            />
+                        </div>
+                    ))}
+                    <div className="container">
+                        <button className="submit" type="submit" >Hozzáadás</button>
                     </div>
-                ))}
-
-                <button type="submit">Hozzáadás</button>
-            </form>
+                </form>
+            </div>
         </div>
     );
 }

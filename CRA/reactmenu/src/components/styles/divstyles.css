@@ -8,19 +8,28 @@ div.container {
 }
 div.container.v {
     flex-direction: column;
-    border: 1px solid #ff9900c9;
 }
 div.container.h {
     flex-direction: row;
-    border: 1px solid #0033ff;
 }
-div.container.button {
-    border: 1px solid #ffffff;
-    flex-direction: column;
-    width: 300px;
-    margin-left: 10px;
-    gap: 2vh;
+div.return{
+    display: flex;
+    justify-self: center;
+    margin-top: 25px;
 }
-.selected{
-    background-color: #cc7a00c9;
+div.leftAligned {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 100%;
+}
+@media (max-width: 1000px) {
+    div.return{
+        margin-top: 15px;
+    }
+}
+@media (max-height: 750px) {
+    div.return{
+        margin-top: 5px;
+    }
 }
