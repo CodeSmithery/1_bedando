@@ -14,11 +14,11 @@ label {
     color: #ffffff;;
 }
 h2 {
-    font-size: calc( ( 4vw + 6vh ) / 2 );
+    font-size: calc( ( 3vw + 4vh ) / 2 );
     color: #ff9100;
 }
 h3 {
-    font-size: calc( ( 3vw + 4vh ) / 2 );
+    font-size: calc( ( 2vw + 3vh ) / 2 );
     color: #ff9100;
 }
 li {

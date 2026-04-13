@@ -1,33 +1,69 @@
-        /* Style for main text elements */
-        p  {font-size: 100%;}
+/* Style for main text elements */
+h2 {
+    font-size: calc( ( 4vw + 6vh ) / 2 );
+    color: #ff9100;
+}
+h3 {
+    font-size: calc( ( 3vw + 4vh ) / 2 );
+    color: #ff9100;
+}
+p  {
+    font-size: 100%;
+}
 
-        p.error {font-size: 100%; 
-                 color: #ff0000;}
+p.error {
+    font-size: 100%; 
+    color: #ff0000;
+}
 
-        h1 {font-size: 250%; 
-            text-align: center;}
+h1 {
+    font-size: 250%; 
+    text-align: center;
+}
 
-        h2.login-text {font-size: 150%; 
-                        text-align: center; 
-                        margin-top: 20px;}
+h2.login-text {
+    font-size: 150%; 
+    text-align: center; 
+    margin-top: 20px;
+}
 
-        html {background-color: #696969; 
-              color: white; 
-              font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
+html {
+    background-color: #666666; 
+    color: #ff9100; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
-        abbr {text-decoration: none; border-bottom: none; cursor: help;}
+abbr {
+    text-decoration: none; 
+    border-bottom: none; 
+    cursor: help;
+}
 
-        abbr.small {font-size: 80%;}
+abbr.small {
+    font-size: 80%;
+}
 
-        label {font-size: 100%; display: block;}
+label {
+    font-size: 100%; 
+    display: block;
+}
 
-        a {color: #ff9900c9;}
+a {
+    color: #ff9100;
+    font-weight: lighter;
+}
 
-        input.id-input {width: 200px; border: 2px solid #0052cd; border-radius: 7px; padding: 3px; font-size: 100%;}
+input.id-input {
+    width: 200px; 
+    border: 2px solid #0052cd; 
+    border-radius: 7px; 
+    padding: 3px; 
+    font-size: 100%;
+}
 
-        div.login-container{
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 20px;
-        }
+div.login-container{
+display: flex; 
+justify-content: center; 
+align-items: center; 
+gap: 20px;
+}

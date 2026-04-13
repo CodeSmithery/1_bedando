@@ -3,7 +3,6 @@ import '../styles/App.css';
 import '../styles/divstyles.css'
 
 
-
 import TableSelector from "../ui/TableSelector";
 import CRUDSelector from "../ui/CRUDSelector";
 
@@ -26,8 +25,10 @@ function MainApp() {
     }
     
     return (
-        
         <div className='container v'>
+            <a href='http://nje.tankonyvrendeles.nhely.hu/'>
+                <button className='mainMenu'>Föoldal</button>
+            </a>
             {/* 1. lépés: tábla választás */}
             {!selectedTable && (
                 <TableSelector onSelect={setSelectedTable} />

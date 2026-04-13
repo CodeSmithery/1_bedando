@@ -1,18 +1,22 @@
-div.vcontainer {
-    border: 1px solid white;
-    display: flex; /* rugalmasan helyezi el az elemeket */
-    flex-direction: column; 
+div.container {
+    display: flex;
+    justify-self: center;
     justify-content: center;
     align-items: center;
-    vertical-align: middle;
-    min-height: 250px;
-    gap: 10vh;
+    width: 96%;
+    height: 96%;
 }
-div.hcontainer {
-    border: 1px solid blue;
-    display: flex;
-    flex-direction: row; 
-    align-items: center;
-    width: calc(100%-15px);
-    gap: 10vw;
+div.container.v {
+    flex-direction: column;
+}
+div.container.h {
+    flex-direction: row;
+}
+.gap {
+    gap: 3vw;
+}
+@media (max-height: 400px){
+    gap {
+        gap: 1.5 vw
+    }
 }

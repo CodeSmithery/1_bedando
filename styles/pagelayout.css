@@ -27,8 +27,12 @@ main {
     justify-content: center;
     justify-self: center;
 }
-@media (max-height: 450px) {
+@media (max-height: 400px) {
     footer, header {
         display: none;
+    }
+    main {
+        height: 350px;
+        width: 100vw;
     }
 }
