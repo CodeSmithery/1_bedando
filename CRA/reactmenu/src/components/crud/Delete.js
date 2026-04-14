@@ -25,22 +25,20 @@ export default function Delete({ table }) {
         <div className="container v">
         <h2>{config.label} – Törlés</h2>
             <ul>
-                {data.map(row => (
-                    <div>
-                        <li key={row[config.key]}>
-                            {config.fields.map(f => (
-                                <div className="leftAligned">
-                                    <span className="">
-                                        <strong>{f.label}:</strong> 
-                                    </span>
-                                    <span className="aligned">
-                                        {String(row[f.name])}
-                                    </span>  
-                                </div>
-                            ))}
-                            <button className="delete" onClick={() => handleDelete(row[config.key])}>Törlés</button>
-                        </li>
-                    </div>
+                {data.map((row, i) => (
+                    <li key={row[config.key]}>
+                        {config.fields.map(f => (
+                            <div className="leftAligned" key={f.name}>
+                                <span className="">
+                                    <strong>{f.label}:</strong> 
+                                </span>
+                                <span className="aligned">
+                                    {String(row[f.name])}
+                                </span>  
+                            </div>
+                        ))}
+                        <button className="delete" onClick={() => handleDelete(row[config.key])}>Törlés</button>
+                    </li>
                 ))}
             </ul>
         </div>

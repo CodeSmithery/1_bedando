@@ -1,5 +1,5 @@
 export function DiakJSON() {
-    return fetch('/data/diak.txt')
+    return fetch('/reactapp/data/diak.txt')
         .then(r => r.text())
         .then(text =>
             text
@@ -21,7 +21,7 @@ export function DiakJSON() {
 
 
 export function RendelesJSON() {
-    return fetch('/data/rendeles.txt')
+    return fetch('/reactapp/data/rendeles.txt')
         .then(r => r.text())
         .then(text =>
             text
@@ -45,7 +45,7 @@ export function RendelesJSON() {
 
 
 export function TkJSON() {
-    return fetch('/data/tk.txt')
+    return fetch('/reactapp/data/tk.txt')
         .then(r => r.text())
         .then(text =>
             text
@@ -68,7 +68,7 @@ export function TkJSON() {
 
 
 export function TkarJSON() {
-    return fetch('/data/tkar.txt')
+    return fetch('/reactapp/data/tkar.txt')
         .then(r => r.text())
         .then(text =>
             text

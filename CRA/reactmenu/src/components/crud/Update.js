@@ -43,19 +43,17 @@ export default function Update({ table }) {
             {!selected && (
                 <ul>
                     {data.map(row => (
-                        <div>
-                            <li key={row[config.key]}>
-                                {config.fields.map(f => (
-                                    <div className="leftAligned">
-                                        <strong>{f.label}:</strong> 
-                                        <span className="aligned">
-                                            {String(row[f.name])}{" "}
-                                        </span>
-                                    </div>
-                                ))}
-                                <button className="modify" onClick={() => selectRow(row)}>Szerkesztés</button>
-                            </li>
-                        </div>
+                        <li key={row[config.key]}>
+                            {config.fields.map(f => (
+                                <div className="leftAligned">
+                                    <strong>{f.label}:</strong> 
+                                    <span className="aligned">
+                                        {String(row[f.name])}{" "}
+                                    </span>
+                                </div>
+                            ))}
+                            <button className="modify" onClick={() => selectRow(row)}>Szerkesztés</button>
+                        </li>
                     ))}
                 </ul>
             )}

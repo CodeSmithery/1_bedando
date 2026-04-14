@@ -18,18 +18,16 @@ export default function Read({ table }) {
             <h2>{config.label} – Lista</h2>
             <ul>
                 {data.map((row, i) => (
-                    <div>
-                        <li key={i}>
-                            {config.fields.map(f => (
-                                <div className="leftAligned">
-                                    <strong>{f.label}:</strong> 
-                                    <span className="aligned">
-                                        {String(row[f.name])}{" "}
-                                    </span>
-                                </div>
-                            ))}
-                        </li>
-                    </div>
+                    <li key={i}>
+                        {config.fields.map(f => (
+                            <div className="leftAligned" key={f.name}>
+                                <strong>{f.label}:</strong> 
+                                <span className="aligned">
+                                    {String(row[f.name])}{" "}
+                                </span>
+                            </div>
+                        ))}
+                    </li>
                 ))}
             </ul>
         </div>

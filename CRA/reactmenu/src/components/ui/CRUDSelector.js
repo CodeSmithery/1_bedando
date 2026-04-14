@@ -6,12 +6,12 @@ export default function CRUDSelector({ onSelect, onBack }) { /*  */
         <div className="container v">
             <h2>Válassz műveletet</h2>
             <div className="contianer h">
-                <button className="menu select" onClick={() => onSelect("create")}>Create</button>
-                <button className="menu select" onClick={() => onSelect("read")}>Read</button>
+                <button className="menu select" onClick={() => onSelect("create")}>Létrehoz</button>
+                <button className="menu select" onClick={() => onSelect("read")}>Olvas</button>
             </div>
             <div className="contianer h">
-                <button className="menu select" onClick={() => onSelect("update")}>Update</button>
-                <button className="menu select" onClick={() => onSelect("delete")}>Delete</button>
+                <button className="menu select" onClick={() => onSelect("update")}>Frissít</button>
+                <button className="menu select" onClick={() => onSelect("delete")}>Töröl</button>
             </div>
             <div className="return">
                 <button className="menu return" onClick={onBack}>Vissza</button>
