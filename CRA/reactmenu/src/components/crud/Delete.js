@@ -28,13 +28,14 @@ export default function Delete({ table }) {
                 {data.map((row, i) => (
                     <li key={row[config.key]}>
                         {config.fields.map(f => (
-                            <div className="leftAligned" key={f.name}>
+                            <div className="leftAligned" key={f.name}>  
                                 <span className="">
                                     <strong>{f.label}:</strong> 
                                 </span>
                                 <span className="aligned">
                                     {String(row[f.name])}
                                 </span>  
+                                
                             </div>
                         ))}
                         <button className="delete" onClick={() => handleDelete(row[config.key])}>Törlés</button>

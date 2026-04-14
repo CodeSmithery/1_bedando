@@ -30,11 +30,11 @@ export const tableConfig = {
     },
 
     tkar: {
-        label: "Tankönyvárak",
+        label: "Tankönyv árak",
         fields: [
             { name: "ev", label: "Év", type: "number" },
             { name: "tkaz", label: "Tankönyv azonosító", type: "number" },
-            { name: "ertek", label: "Érték", type: "number" }
+            { name: "ertek", label: "Ár", type: "number" }
         ],
         key: ["ev", "tkaz"] // összetett kulcs
     }

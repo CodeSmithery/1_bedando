@@ -42,7 +42,7 @@ ul {
     gap: 8px;
 }
 span.aligned {
-    margin-left: 1.5vw;
+    margin-left: 3px;
 }
 
 @media (max-width=500px)
