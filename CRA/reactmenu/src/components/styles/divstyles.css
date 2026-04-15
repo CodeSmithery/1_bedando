@@ -20,7 +20,6 @@ div.return{
 div.leftAligned {
     display: flex;
     flex-direction: row;
-    border: 1px solid #ff9100;
     min-width: 140px;
     width: 9vw;
     max-width: 300px;
