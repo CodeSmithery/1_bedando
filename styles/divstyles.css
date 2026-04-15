@@ -1,0 +1,22 @@
+div.container {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    height: 96%;
+}
+div.container.v {
+    flex-direction: column;
+}
+div.container.h {
+    flex-direction: row;
+}
+.gap {
+    gap: 3vw;
+}
+@media (max-height: 400px){
+    gap {
+        gap: 1.5 vw
+    }
+}

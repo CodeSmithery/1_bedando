@@ -1,0 +1,12 @@
+button.index {
+    border: #ff9100 solid 0.5px;
+    padding: 2px;
+    min-height: 120px;
+    min-width: 300px;
+    width: 35vw;
+    height: 20vh;
+    border-radius: 5vh;
+    color: #ff9100;
+    font-size: clamp(16px, 4vh, 54px);
+    background-color: #363636a5;
+}
