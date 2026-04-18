@@ -1,4 +1,3 @@
-// LOGIN
 function login() {
     let username = document.getElementById("username")?.value;
     let password = document.getElementById("password")?.value;
@@ -11,8 +10,6 @@ function login() {
     }
 }
 
-
-// DATA ARRAY
 let students = [
     { name: "Török Nóra", class: "2001B" },
     { name: "Molnár Róbert", class: "2002A" },
@@ -21,8 +18,6 @@ let students = [
     { name: "Bodosi János", class: "2005A" }
 ];
 
-
-// CREATE
 function addStudent() {
     let name = document.getElementById("newName")?.value;
     let className = document.getElementById("newClass")?.value;
@@ -40,8 +35,6 @@ function addStudent() {
     render();
 }
 
-
-// READ
 function render() {
     let list = document.getElementById("list");
     if (!list) return;
@@ -64,15 +57,11 @@ function render() {
     });
 }
 
-
-// DELETE
 function deleteStudent(index) {
     students.splice(index, 1);
     render();
 }
 
-
-// UPDATE
 function editStudent(index) {
     let newName = prompt("New name:", students[index].name);
     let newClass = prompt("New class:", students[index].class);
@@ -83,7 +72,6 @@ function editStudent(index) {
         render();
     }
 }
-
 
 window.onload = function () {
     render();

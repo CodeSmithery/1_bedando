@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>OOJS - Diákok</title>
+
+<style>
+body {
+  background: linear-gradient(135deg, #2c2f36, #1a1c22);
+  font-family: Arial;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
+h1 {
+  margin-top: 30px;
+}
+
+.search-box {
+  margin: 20px auto;
+}
+
+.search-box input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.card {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<script>
+
+class Person {
+  constructor(name, id) {
+    this.name = name;
+    this.id = id;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+class Student extends Person {
+  constructor(name, id, className) {
+    super(name, id);
+    this.className = className;
+  }
+
+  render() {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <h3>👤 ${this.getName()}</h3>
+      <p>🎓 Osztály: ${this.className}</p>
+    `;
+
+    return div;
+  }
+}
+
+class StudentList {
+  constructor(students) {
+    this.students = students;
+    this.filtered = students;
+  }
+
+  render() {
+    document.body.innerHTML = `
+      <h1>Diákok listája (OOP)</h1>
+      <div class="search-box">
+        <input type="text" placeholder="Keresés név alapján..." id="search">
+      </div>
+      <div class="container" id="list"></div>
+    `;
+
+    this.renderList();
+
+    document.getElementById("search").addEventListener("input", (e) => {
+      const value = e.target.value.toLowerCase();
+
+      this.filtered = this.students.filter(s =>
+        s.name.toLowerCase().includes(value)
+      );
+
+      this.renderList();
+    });
+  }
+
+  renderList() {
+    const container = document.getElementById("list");
+    container.innerHTML = "";
+
+    this.filtered.forEach(student => {
+      container.appendChild(student.render());
+    });
+  }
+}
+
+fetch("../data/txt/diak.txt")
+  .then(res => res.text())
+  .then(text => {
+
+    const lines = text.split("\n").slice(1);
+
+    const students = lines
+      .filter(line => line.trim() !== "")
+      .map(line => {
+        const parts = line.split("\t");
+
+        return new Student(
+          parts[1],
+          parts[0],
+          parts[2]  
+        );
+      });
+
+    const list = new StudentList(students);
+    list.render();
+  });
+
+</script>
+
+</body>
+</html>
