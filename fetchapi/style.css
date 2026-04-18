@@ -1,0 +1,157 @@
+
+.home-btn {
+    display: inline-block;
+    margin: 20px auto;
+    padding: 10px 25px;
+    border: #ff9100 solid 2px;
+    border-radius: 20px;
+    background-color: #363636a5;
+    color: #ff9100;
+    font-size: 140%;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.home-btn:hover {
+    background-color: #ff9100;
+    color: #363636;
+}
+
+
+html, body {
+    background-color: #666666;
+    color: #ff9100;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: calc((4vw + 6vh) / 2);
+    margin-top: 20px;
+    color: #ff9100;
+}
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+
+form#tkForm {
+    background-color: #363636a5;
+    border: 1px solid #ff9100;
+    border-radius: 20px;
+    padding: 20px 30px;
+    width: min(500px, 90%);
+    margin-bottom: 40px;
+}
+
+.form-row {
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    font-size: 110%;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-row input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ff9100;
+    border-radius: 10px;
+    background-color: #444;
+    color: #ff9100;
+    font-size: 100%;
+}
+
+button#submitBtn {
+    width: 100%;
+    padding: 12px;
+    background-color: #363636a5;
+    border: 2px solid #ff9100;
+    border-radius: 20px;
+    color: #ff9100;
+    font-size: 120%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button#submitBtn:hover {
+    background-color: #ff9100;
+    color: #363636;
+}
+
+table.data-table {
+    width: 90%;
+    max-width: 900px;
+    border-collapse: collapse;
+    background-color: #363636a5;
+    border: 2px solid #ff9100;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+table.data-table th {
+    background-color: #ff9100;
+    color: #363636;
+    padding: 12px;
+    font-size: 120%;
+}
+
+table.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ff9100;
+    font-size: 110%;
+}
+
+table.data-table tr:hover {
+    background-color: #444;
+}
+
+.editBtn, .deleteBtn {
+    padding: 6px 12px;
+    border-radius: 10px;
+    border: 2px solid #ff9100;
+    background-color: #363636a5;
+    color: #ff9100;
+    cursor: pointer;
+    font-size: 100%;
+    transition: 0.2s;
+}
+
+.editBtn:hover {
+    background-color: #ff9100;
+    color: #363636;
+}
+
+.deleteBtn {
+    border-color: #ff0000;
+    color: #ff0000;
+}
+
+.deleteBtn:hover {
+    background-color: #ff0000;
+    color: #363636;
+}
+
+@media (max-width: 600px) {
+    table.data-table th,
+    table.data-table td {
+        font-size: 90%;
+        padding: 8px;
+    }
+
+    button.editBtn,
+    button.deleteBtn {
+        padding: 4px 8px;
+        font-size: 90%;
+    }
+}

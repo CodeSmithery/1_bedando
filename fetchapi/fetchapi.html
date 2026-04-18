@@ -3,51 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fetch API – Diák CRUD</title>
+    <title>Tankönyvek CRUD</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="main">
+    <a href="/index.html" class="home-btn">Főoldal</a>
 
-    <h1>Diákok kezelése (CRUD)</h1>
+    <h1>Tankönyvek kezelése</h1>
 
-    <!-- ŰRLAP HOZZÁADÁSHOZ / MÓDOSÍTÁSHOZ -->
-    <form id="diakForm" class="form-container">
+    <form id="tkForm" class="form-container">
 
         <div class="form-row">
-            <label for="az">Azonosító:</label>
-            <input type="number" id="az" required>
+            <label for="title">Cím:</label>
+            <input type="text" id="title" required>
         </div>
 
         <div class="form-row">
-            <label for="nev">Név:</label>
-            <input type="text" id="nev" required>
+            <label for="subject">Tantárgy:</label>
+            <input type="text" id="subject" required>
         </div>
 
         <div class="form-row">
-            <label for="osztaly">Osztály:</label>
-            <input type="text" id="osztaly" required>
+            <label for="publisher">Kiadói kód:</label>
+            <input type="text" id="publisher" required>
         </div>
 
         <button id="submitBtn" class="btn-primary">Hozzáadás</button>
     </form>
 
-
-    <!-- LISTA / TÁBLÁZAT -->
     <table class="data-table">
         <thead>
             <tr>
-                <th>Az</th>
-                <th>Név</th>
-                <th>Osztály</th>
+                <th>ID</th>
+                <th>Cím</th>
+                <th>Tantárgy</th>
+                <th>Kiadó</th>
                 <th>Műveletek</th>
             </tr>
         </thead>
 
-        <tbody id="diakTableBody">
-            <!-- JS tölti be -->
-        </tbody>
+        <tbody id="tkTableBody"></tbody>
     </table>
 
     <script src="script.js"></script>

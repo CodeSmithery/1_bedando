@@ -87,6 +87,54 @@ button.cancel {
         font-size: clamp(0.5rem, 1.2vw, 1.5rem);
         margin-bottom: 1.5vh;
 }
+button.mainMenu:hover {
+    background-color: #ff9100;
+    color: #363636;
+    cursor: pointer;
+    transition: 0.2s;
+}
+button.menu.select:hover {
+    background-color: #ff9100;
+    color: #363636;
+    cursor: pointer;
+    transition: 0.25s;
+}
+button.menu.return:hover {
+    background-color: #363636;
+    color: #ff9100;
+    cursor: pointer;
+    transition: 0.25s;
+}
+button.submit:hover {
+    background-color: #22ff00;
+    color: #363636;
+    cursor: pointer;
+    transition: 0.25s;
+}
+button.save:hover {
+    background-color: #22ff00;
+    color: #363636;
+    cursor: pointer;
+    transition: 0.25s;
+}
+button.delete:hover {
+    background-color: #980000;
+    color: #ff9100;
+    cursor: pointer;
+    transition: 0.25s;
+}
+button.modify:hover {
+    background-color: #363636;
+    color: #ff9100;
+    cursor: pointer;
+    transition: 0.25s;
+}
+button.cancel:hover {
+    background-color: #980000;
+    color: #363636;
+    cursor: pointer;
+    transition: 0.25s;
+}
 @media (max-width: 1000px) {
     button.menu.select {
         margin: 20px;

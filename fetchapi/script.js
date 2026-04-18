@@ -1,35 +1,35 @@
+const API_URL = "http://nje.tankonyvrendeles.nhely.hu/api.php/";
 
-//  ALAP BEÁLLÍTÁSOK
-const API_URL = "api.php";
+const tableBody = document.querySelector("#tkTableBody");
+const form = document.querySelector("#tkForm");
 
-// DOM elemek
-const tableBody = document.querySelector("#diakTableBody");
-const form = document.querySelector("#diakForm");
-const azInput = document.querySelector("#az");
-const nevInput = document.querySelector("#nev");
-const osztalyInput = document.querySelector("#osztaly");
+const titleInput = document.querySelector("#title");
+const subjectInput = document.querySelector("#subject");
+const publisherInput = document.querySelector("#publisher");
+
 const submitBtn = document.querySelector("#submitBtn");
 
-let editMode = false;   // false = új, true = módosítás
+let editId = null;
 
 
 //  LISTA BETÖLTÉSE
-async function loadDiakok() {
+async function loadBooks() {
     const res = await fetch(API_URL);
     const data = await res.json();
 
     tableBody.innerHTML = "";
 
-    data.forEach(diak => {
+    data.forEach(book => {
         const tr = document.createElement("tr");
 
         tr.innerHTML = `
-            <td>${diak.az}</td>
-            <td>${diak.nev}</td>
-            <td>${diak.osztaly}</td>
+            <td>${book.id}</td>
+            <td>${book.title}</td>
+            <td>${book.subject}</td>
+            <td>${book.publisher}</td>
             <td>
-                <button class="editBtn" data-id="${diak.az}">✏️</button>
-                <button class="deleteBtn" data-id="${diak.az}">🗑️</button>
+                <button class="editBtn" data-id="${book.id}">✏️</button>
+                <button class="deleteBtn" data-id="${book.id}">🗑️</button>
             </td>
         `;
 
@@ -47,72 +47,72 @@ function addEventListeners() {
     });
 
     document.querySelectorAll(".deleteBtn").forEach(btn => {
-        btn.addEventListener("click", () => deleteDiak(btn.dataset.id));
+        btn.addEventListener("click", () => deleteBook(btn.dataset.id));
     });
 }
+
 
 //  HOZZÁADÁS / MÓDOSÍTÁS
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const diak = {
-        az: azInput.value,
-        nev: nevInput.value,
-        osztaly: osztalyInput.value
+    const book = {
+        title: titleInput.value,
+        subject: subjectInput.value,
+        publisher: publisherInput.value
     };
 
-    if (!editMode) {
+    if (editId === null) {
         // CREATE
         await fetch(API_URL, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(diak)
+            body: JSON.stringify(book)
         });
     } else {
         // UPDATE
-        await fetch(API_URL, {
+        await fetch(`${API_URL}?id=${editId}`, {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(diak)
+            body: JSON.stringify(book)
         });
 
-        editMode = false;
+        editId = null;
         submitBtn.textContent = "Hozzáadás";
     }
 
     form.reset();
-    loadDiakok();
+    loadBooks();
 });
 
 
 //  MÓDOSÍTÁS INDÍTÁSA
-async function startEdit(az) {
+async function startEdit(id) {
     const res = await fetch(API_URL);
     const data = await res.json();
 
-    const diak = data.find(d => d.az == az);
+    const book = data.find(b => b.id == id);
 
-    azInput.value = diak.az;
-    nevInput.value = diak.nev;
-    osztalyInput.value = diak.osztaly;
+    titleInput.value = book.title;
+    subjectInput.value = book.subject;
+    publisherInput.value = book.publisher;
 
-    editMode = true;
+    editId = id;
     submitBtn.textContent = "Módosítás";
 }
 
+
 //  TÖRLÉS
-async function deleteDiak(az) {
+async function deleteBook(id) {
     if (!confirm("Biztosan törlöd?")) return;
 
-    await fetch(API_URL, {
-        method: "DELETE",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ az })
+    await fetch(`${API_URL}?id=${id}`, {
+        method: "DELETE"
     });
 
-    loadDiakok();
+    loadBooks();
 }
 
 
 //  OLDAL BETÖLTÉSEKOR
-loadDiakok();
+loadBooks();
