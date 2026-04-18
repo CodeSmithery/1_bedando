@@ -1,83 +1,123 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Teacher Login</title>
-    <link rel="stylesheet" href="/Styles/textstyles.css">
-    <style>
-      body {
+<meta charset="UTF-8">
+<title>Diákok kezelése</title>
+
+<style>
+body {
+    background: #2b2b2b;
+    font-family: Arial;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #666;
     color: white;
 }
 
-/* FEJLÉC */
+.home-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.home-btn a {
+    display: inline-block;
+    padding: 12px 25px;
+    border: 2px solid #ff9800;
+    border-radius: 25px;
+    color: #ff9800;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.home-btn a:hover {
+    background: #ff9800;
+    color: black;
+}
+
 h1 {
     text-align: center;
-    margin-top: 40px;
-    font-size: 40px;
+    color: #ff9800;
+    margin-top: 20px;
 }
 
-/* LOGIN DOBOZ */
-.login-container {
-    width: 300px;
-    margin: 50px auto;
-    text-align: center;
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    background: #3a3a3a;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #ff9800;
 }
 
-.login-container input {
-    width: 100%;
+input {
+    width: 90%;
     padding: 10px;
-    margin: 5px 0;
-    box-sizing: border-box;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 2px solid #ff9800;
+    background: transparent;
+    color: white;
 }
 
-.login-container button {
-    width: 100%;
-    padding: 10px;
+button {
+    padding: 10px 20px;
     margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid #ff9800;
+    background: transparent;
+    color: #ff9800;
     cursor: pointer;
 }
 
-/* FOOTER */
-footer {
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
+button:hover {
+    background: #ff9800;
+    color: black;
 }
 
-footer a {
-    color: orange;
-    margin: 0 10px;
-    text-decoration: none;
+ul {
+    list-style: none;
+    padding: 0;
 }
-    </style>
+
+li {
+    background: #2b2b2b;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ff9800;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions button {
+    margin-left: 5px;
+}
+
+.delete-btn {
+    border-color: red;
+    color: red;
+}
+
+.delete-btn:hover {
+    background: red;
+    color: white;
+}
+</style>
+
 </head>
 <body>
 
-<h1>Book Ordering</h1>
+<div class="home-btn">
+    <a href="../index.html">Főoldal</a>
+</div>
 
-<!-- LOGIN -->
-<h2 id="loginTitle">Teacher Login</h2>
+<h1>Diákok kezelése</h1>
 
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
+<div class="container">
 
-<p id="hiba" style="color:red;"></p>
-
-<hr>
-
-<!-- CRUD RÉSZ -->
-<div id="app" style="display:none;">
-
-    <h2>Student Management</h2>
-
-    <input id="newName" placeholder="Name">
-    <input id="newClass" placeholder="Class">
-    <button onclick="addStudent()">Add Student</button>
+    <input id="newName" placeholder="Név">
+    <input id="newClass" placeholder="Osztály">
+    <button onclick="addStudent()">Hozzáadás</button>
 
     <ul id="lista"></ul>
 
@@ -85,37 +125,35 @@ footer a {
 
 <script>
 
-// LOGIN
-function login() {
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+let students = [];
 
-    if (username.trim() === "Figura Kristof" && password.trim() === "beadando") {
-        document.getElementById("error").innerText = "";
-        document.getElementById("app").style.display = "block";
-        render();
-        
-    } else {
-        document.getElementById("error").innerText = "Invalid username or password!";
-    }
+function loadData() {
+    fetch("../data/txt/diak.txt")
+        .then(res => res.text())
+        .then(text => {
+            const lines = text.split("\n").slice(1);
+
+            students = lines
+                .filter(line => line.trim() !== "")
+                .map(line => {
+                    const parts = line.trim().split(/\s+/);
+
+                    return {
+                        name: parts[1] + " " + parts[2],
+                        class: parts[3]
+                    };
+                });
+
+            render();
+        });
 }
 
-// DATA ARRAY
-let students = [
-    { name: "Török Nóra", class: "2001B" },
-    { name: "Molnár Róbert", class: "2002A" },
-    { name: "Szabó Ádám", class: "2002B" },
-    { name: "Blazsetics Olga", class: "2003B" },
-    { name: "Bodosi János", class: "2005A" }
-];
-
-// CREATE
 function addStudent() {
     let name = document.getElementById("newName").value;
     let className = document.getElementById("newClass").value;
 
     if (!name || !className) {
-        alert("Please fill in all fields!");
+        alert("Kérlek tölts ki minden mezőt!");
         return;
     }
 
@@ -127,37 +165,36 @@ function addStudent() {
     render();
 }
 
-// READ
 function render() {
-    let list = document.getElementById("list");
+    let list = document.getElementById("lista");
     list.innerHTML = "";
 
     if (students.length === 0) {
-        list.innerHTML = "<li>No data available</li>";
+        list.innerHTML = "<li>Nincs adat</li>";
         return;
     }
 
     students.forEach((d, index) => {
         list.innerHTML += `
             <li>
-                ${d.name} (${d.class})
-                <button onclick="deleteStudent(${index})">Delete</button>
-                <button onclick="editStudent(${index})">Edit</button>
+                <span>${d.name} (${d.class})</span>
+                <div class="actions">
+                    <button onclick="editStudent(${index})">✏️</button>
+                    <button class="delete-btn" onclick="deleteStudent(${index})">🗑️</button>
+                </div>
             </li>
         `;
     });
 }
 
-// DELETE
 function deleteStudent(index) {
     students.splice(index, 1);
     render();
 }
 
-// UPDATE
 function editStudent(index) {
-    let newName = prompt("New name:", students[index].name);
-    let newClass = prompt("New class:", students[index].class);
+    let newName = prompt("Új név:", students[index].name);
+    let newClass = prompt("Új osztály:", students[index].class);
 
     if (newName && newClass) {
         students[index].name = newName;
@@ -166,6 +203,9 @@ function editStudent(index) {
     }
 }
 
+loadData();
+
 </script>
+
 </body>
 </html>

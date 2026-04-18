@@ -6,52 +6,84 @@
 
 <style>
 body {
-  background: linear-gradient(135deg, #2c2f36, #1a1c22);
-  font-family: Arial;
-  color: white;
-  text-align: center;
+  background: #2b2b2b;
+  font-family: Arial, sans-serif;
   margin: 0;
+  color: white;
+}
+
+.home-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.home-btn a {
+  display: inline-block;
+  padding: 12px 25px;
+  border: 2px solid #ff9800;
+  border-radius: 25px;
+  color: #ff9800;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.home-btn a:hover {
+  background-color: #ff9800;
+  color: black;
 }
 
 h1 {
-  margin-top: 30px;
+  text-align: center;
+  color: #ff9800;
+  margin-top: 20px;
 }
 
 .search-box {
-  margin: 20px auto;
+  text-align: center;
+  margin: 20px;
 }
 
 .search-box input {
   padding: 10px;
   width: 250px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
+  border-radius: 10px;
+  border: 2px solid #ff9800;
+  background: transparent;
+  color: white;
+}
+
+.search-box input::placeholder {
+  color: #ccc;
 }
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  padding: 30px;
+  padding: 20px;
 }
 
 .card {
-  background: white;
-  color: black;
+  background: #3a3a3a;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  border: 2px solid #ff9800;
+  text-align: center;
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255,152,0,0.5);
 }
 
 .card h3 {
   margin-bottom: 10px;
+}
+
+.card p {
+  margin: 5px 0;
 }
 </style>
 
@@ -99,12 +131,18 @@ class StudentList {
 
   render() {
     document.body.innerHTML = `
-      <h1>Diákok listája (OOP)</h1>
-      <div class="search-box">
-        <input type="text" placeholder="Keresés név alapján..." id="search">
-      </div>
-      <div class="container" id="list"></div>
-    `;
+  <div class="home-btn">
+    <a href="../index.html">Főoldal</a>
+  </div>
+
+  <h1>Diákok listája (OOP)</h1>
+
+  <div class="search-box">
+    <input type="text" placeholder="Keresés név alapján..." id="search">
+  </div>
+
+  <div class="container" id="list"></div>
+`;
 
     this.renderList();
 
