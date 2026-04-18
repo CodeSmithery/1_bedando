@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SPA</title>
+
+<style>
+body {
+  background-color: #2c2f36;
+  font-family: Arial;
+}
+
+h1 {
+      text-align: center;
+      color: black;
+}
+
+.container {
+  background: white;
+  width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);  
+  text-align: center;
+}
+
+input {
+      display: block;
+      margin: 10px auto;
+      width: 60%;
+      padding: 8px;
+}
+  
+ul {
+      text-align: left;
+ }
+
+.menu {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.menu button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.answer-btn {
+  width: 100px;
+  height: 100px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.answer-btn:hover {
+  background-color: #cfcfcf;
+}
+
+.correct {
+  background-color: #4caf50 !important;
+  color: white;
+}
+
+.wrong {
+  background-color: #e74c3c !important;
+  color: white;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1 style="text-align:center;">Játékos alkalmazások</h1>
+
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+const { useState } = React;
+
+function App() {
+  const [view, setView] = useState("search");
+
+  return (
+    <div>
+      <div className="menu">
+        <button onClick={() => setView("search")}>📚 Könyv kereső</button>
+        <button onClick={() => setView("quiz")}>❓ Kvíz játék</button>
+      </div>
+
+      {view === "search" && <Search />}
+      {view === "quiz" && <QuizApp />}
+    </div>
+  );
+}
+
+function Search() {
+  const [query, setQuery] = React.useState("");
+  const [books, setBooks] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("../react-app/public/tk.txt")
+      .then(res => res.text())
+      .then(text => {
+        const lines = text.split("\n").slice(1);
+
+        const loadedBooks = lines
+          .filter(line => line.trim() !== "")
+          .map((line, index) => {
+            const parts = line.split("\t");
+
+            return {
+              id: index,
+              title: parts[2],
+              subject: parts[3],
+              publisher: parts[1]
+            };
+          });
+
+        setBooks(loadedBooks);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+  const filtered = books.filter(b =>
+    b.title.toLowerCase().includes(query.toLowerCase())
+  );
+
+  return (
+    <div className="container">
+      <h2>Könyv kereső</h2>
+
+      <input
+        placeholder="Keresés..."
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+      />
+
+      <ul>
+        {filtered.map((b) => (
+          <li key={b.id}>
+            {b.title} ({b.subject}) - {b.publisher}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Answer({ value, onClick, className }) {
+  return (
+    <button className={"answer-btn " + className} onClick={onClick}>
+      {value}
+    </button>
+  );
+}
+
+function Question({ data, onAnswer, selected, showResult }) {
+  return (
+    <div className="container">
+      <h2>Melyik tantárgyhoz tartozik?</h2>
+      <h3>{data.title}</h3>
+
+      <div className="answer-grid">
+        {data.answers.map((ans, i) => {
+          let extraClass = "";
+
+          if (showResult) {
+            if (ans === data.correct) extraClass = "correct";
+            else if (ans === selected) extraClass = "wrong";
+          }
+
+          return (
+            <Answer
+              key={i}
+              value={ans}
+              className={extraClass}
+              onClick={() => onAnswer(ans)}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function QuizApp() {
+
+  const books = [
+    { title: "Matematika 9.", subject: "matematika" },
+    { title: "Történelem I.", subject: "történelem" },
+    { title: "Fizika 9.", subject: "fizika" },
+    { title: "Kémia 9.", subject: "kémia" }
+  ];
+
+  const subjects = ["matematika", "történelem", "fizika", "kémia"];
+
+  const [index, setIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+
+  const [questions] = useState(() =>
+  books.map(book => ({
+    title: book.title,
+    correct: book.subject,
+    answers: [...subjects].sort(() => 0.5 - Math.random())
+  }))
+);
+
+  function handleAnswer(answer) {
+  if (showResult) return;
+
+  setSelected(answer);
+  setShowResult(true);
+
+  if (answer === questions[index].correct) {
+    setScore(prev => prev + 1);
+  }
+
+  setTimeout(() => {
+    setIndex(prev => prev + 1);
+    setSelected(null);
+    setShowResult(false);
+  }, 1200);
+}
+
+  if (index >= questions.length) {
+    return (
+      <div className="container">
+        <h2>Vége!</h2>
+        <p>Pontszám: {score} / {questions.length}</p>
+
+        <button onClick={() => {
+          setIndex(0);
+          setScore(0);
+        }}>
+          Újra
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <p style={{textAlign:"center", color:"white"}}>
+        🎯 Pontszám: {score}
+      </p>
+
+      <Question
+        data={questions[index]}
+        onAnswer={handleAnswer}
+        selected={selected}
+        showResult={showResult}
+      />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+
+</script>
+
+</body>
+</html>
