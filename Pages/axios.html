@@ -1,131 +1,208 @@
 <!DOCTYPE html>
-<html>
+<html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Axios CRUD</title>
+<title>Könyvek kezelése</title>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <style>
 body {
-  background-color: #2c2f36;
-  font-family: Arial;
+    background: #2b2b2b;
+    font-family: Arial;
+    margin: 0;
+    color: white;
+}
+
+.home-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.home-btn a {
+    display: inline-block;
+    padding: 12px 25px;
+    border: 2px solid #ff9800;
+    border-radius: 25px;
+    color: #ff9800;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.home-btn a:hover {
+    background: #ff9800;
+    color: black;
 }
 
 .container {
-  background: white;
-  width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 10px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #3a3a3a;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #ff9800;
+}
+
+h1 {
+    text-align: center;
+    color: #ff9800;
 }
 
 input {
-  margin: 5px;
-  padding: 8px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: 2px solid #ff9800;
+    background: transparent;
+    color: white;
 }
 
 button {
-  margin: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid #ff9800;
+    background: transparent;
+    color: #ff9800;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff9800;
+    color: black;
 }
 
 ul {
-  text-align: left;
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #2b2b2b;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ff9800;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li span {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.actions button {
+    margin-left: 5px;
+}
+
+.delete-btn {
+    border-color: red;
+    color: red;
+}
+
+.delete-btn:hover {
+    background: red;
+    color: white;
 }
 </style>
-
 </head>
 
 <body>
 
-<div id="app"></div>
+<div class="home-btn">
+    <a href="../index.html">Főoldal</a>
+</div>
 
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<div class="container">
+    <h1>Könyvek kezelése</h1>
 
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <input type="text" id="title" placeholder="Cím">
+    <input type="text" id="subject" placeholder="Tantárgy">
+    <input type="text" id="publisher" placeholder="Kiadó">
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <br>
+    <button id="saveBtn" onclick="saveBook()">Hozzáadás</button>
 
-<script type="text/babel">
+    <ul id="list"></ul>
+</div>
 
-const { useState, useEffect } = React;
-
+<script>
 const API = "http://nje.tankonyvrendeles.nhely.hu/api.php";
 
-function App() {
+let editId = null;
 
-  const [books, setBooks] = useState([]);
-  const [title, setTitle] = useState("");
-  const [subject, setSubject] = useState("");
-  const [publisher, setPublisher] = useState("");
-
-  function loadBooks() {
+function loadBooks() {
     axios.get(API)
-      .then(res => setBooks(res.data))
-      .catch(err => console.error(err));
-  }
+        .then(res => {
+            const list = document.getElementById("list");
+            list.innerHTML = "";
 
-  useEffect(() => {
-    loadBooks();
-  }, []);
+            res.data.forEach(book => {
+                const li = document.createElement("li");
 
-  function addBook() {
-    axios.post(API, {
-      title,
-      subject,
-      publisher
-    })
-    .then(() => {
-      loadBooks();
-      setTitle("");
-      setSubject("");
-      setPublisher("");
-    });
-  }
+                li.innerHTML = `
+                    <span>
+                        ${book.title} (${book.subject}) - ${book.publisher}
+                    </span>
+                    <div class="actions">
+                        <button onclick="editBook(${book.id}, '${book.title}', '${book.subject}', '${book.publisher}')">✏️</button>
+                        <button class="delete-btn" onclick="deleteBook(${book.id})">🗑️</button>
+                    </div>
+                `;
 
-  function deleteBook(id) {
-    axios.delete(API + "?id=" + id)
-      .then(() => loadBooks());
-  }
-
-  return (
-    <div className="container">
-      <h2>Könyvek kezelése</h2>
-
-      <div>
-        <input
-          placeholder="Cím"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <input
-          placeholder="Tantárgy"
-          value={subject}
-          onChange={e => setSubject(e.target.value)}
-        />
-        <input
-          placeholder="Kiadó"
-          value={publisher}
-          onChange={e => setPublisher(e.target.value)}
-        />
-        <button onClick={addBook}>Hozzáadás</button>
-      </div>
-
-      <ul>
-        {books.map(b => (
-          <li key={b.id}>
-            {b.title} ({b.subject}) - {b.publisher}
-            <button onClick={() => deleteBook(b.id)}>❌</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+                list.appendChild(li);
+            });
+        });
 }
 
-ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+function saveBook() {
+    const title = document.getElementById("title").value;
+    const subject = document.getElementById("subject").value;
+    const publisher = document.getElementById("publisher").value;
 
+    if (editId === null) {
+        axios.post(API, { title, subject, publisher })
+            .then(() => {
+                loadBooks();
+                clearForm();
+            });
+    } else {
+        axios.put(API + "?id=" + editId, { title, subject, publisher })
+            .then(() => {
+                loadBooks();
+                clearForm();
+                editId = null;
+                document.getElementById("saveBtn").innerText = "Hozzáadás";
+            });
+    }
+}
+
+function editBook(id, title, subject, publisher) {
+    document.getElementById("title").value = title;
+    document.getElementById("subject").value = subject;
+    document.getElementById("publisher").value = publisher;
+
+    editId = id;
+    document.getElementById("saveBtn").innerText = "Mentés";
+}
+
+function deleteBook(id) {
+    if (confirm("Biztos törlöd?")) {
+        axios.delete(API + "?id=" + id)
+            .then(() => loadBooks());
+    }
+}
+
+function clearForm() {
+    document.getElementById("title").value = "";
+    document.getElementById("subject").value = "";
+    document.getElementById("publisher").value = "";
+}
+
+loadBooks();
 </script>
 
 </body>
