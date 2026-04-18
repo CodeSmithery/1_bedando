@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tankönyvek CRUD</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="main">
+    <a href="/index.html" class="home-btn">Főoldal</a>
+
+    <h1>Tankönyvek kezelése</h1>
+
+    <form id="tkForm" class="form-container">
+
+        <div class="form-row">
+            <label for="title">Cím:</label>
+            <input type="text" id="title" required>
+        </div>
+
+        <div class="form-row">
+            <label for="subject">Tantárgy:</label>
+            <input type="text" id="subject" required>
+        </div>
+
+        <div class="form-row">
+            <label for="publisher">Kiadói kód:</label>
+            <input type="text" id="publisher" required>
+        </div>
+
+        <button id="submitBtn" class="btn-primary">Hozzáadás</button>
+    </form>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cím</th>
+                <th>Tantárgy</th>
+                <th>Kiadó</th>
+                <th>Műveletek</th>
+            </tr>
+        </thead>
+
+        <tbody id="tkTableBody"></tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
